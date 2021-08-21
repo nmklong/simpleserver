@@ -5,8 +5,7 @@ const store = require('./store')
 const app = express()
 app.use(express.static('public'))
 app.use(bodyParser.json())
-app.get('/helloWorld', (req, res) => {
-    console.log(req.body);
+app.get('/getWelcomeText', (req, res) => {
     res.send({
         welcomeText: 'WELCOME, BACKEND CONNECTED'
     });
