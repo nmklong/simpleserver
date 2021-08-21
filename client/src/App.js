@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
+import { CreateForm } from './product/CreateForm';
 
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
     <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>{welcomeText}</h1>
-        <Button variant="primary" size="xxl">Click Me</Button>
+        <CreateForm />
     </div>
   );
 }
