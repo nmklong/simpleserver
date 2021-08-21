@@ -12,11 +12,12 @@ app.get('/getWelcomeText', (req, res) => {
 })
 
 app.post('/createProduct', (req, res) => {
+    console.log(req.body);
     store
         .createProduct({
-            name: req.body.name,
-            description: req.body.name,
-            price: req.body.price
+            name: req.body.productName,
+            description: req.body.productDescription,
+            price: req.body.productPrice
         })
         .then(() => res.sendStatus(200))
 })
