@@ -11,11 +11,12 @@ app.get('/getWelcomeText', (req, res) => {
     });
 })
 
-app.post('/createUser', (req, res) => {
+app.post('/createProduct', (req, res) => {
     store
-        .createUser({
-            username: req.body.username,
-            password: req.body.password
+        .createProduct({
+            name: req.body.name,
+            description: req.body.name,
+            price: req.body.price
         })
         .then(() => res.sendStatus(200))
 })
