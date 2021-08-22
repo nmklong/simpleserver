@@ -8,7 +8,7 @@ export const ProductList = () => {
     useEffect( () => {
         const loadProductData = async () => {
             const response = await axios.get('/products');
-            setProductData(response.data);
+            setProductData(response.data.data);
         }
 
         loadProductData().then(r => {});

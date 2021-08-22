@@ -12,7 +12,6 @@ app.get('/getWelcomeText', (req, res) => {
 })
 
 app.post('/products', (req, res) => {
-    console.log(req.body);
     store.createProduct({
         name: req.body.name,
         description: req.body.description,
@@ -24,8 +23,22 @@ app.post('/products', (req, res) => {
     })
 })
 
-app.get('/products', (req, res) => {
-    store.getProducts().then(data => res.send(data));
+app.get('/products', async (req, res) => {
+    const currentPage = req.query.page ? req.query.page : 1;
+    const pageSize = req.query.limit ? req.query.limit : 10;
+    const sortBy = req.query.sort ? req.query.sort : 'id';
+
+    const totalRowsCountResult = await store.countProducts();
+    const totalRowsCount = totalRowsCountResult.total_count;
+    const totalPages = Math.ceil(totalRowsCount/pageSize);
+
+    store.getProducts().then(data => res.send({
+        data,
+        totalPages,
+        currentPage,
+        pageSize,
+        sortBy
+    }));
 })
 
 app.listen(7555, () => {

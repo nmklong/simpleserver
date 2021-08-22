@@ -19,11 +19,16 @@ const createProduct = ({name, description, price}) => {
     });
 };
 
+const countProducts = () => {
+    return knex('product').count('id AS total_count').first();
+}
+
 const getProducts = () => {
     return knex('product');
 }
 
 module.exports = {
+    countProducts,
     createProduct,
     getProducts
 }
