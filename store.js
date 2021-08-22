@@ -23,8 +23,8 @@ const countProducts = () => {
     return knex('product').count('id AS total_count').first();
 }
 
-const getProducts = () => {
-    return knex('product');
+const getProducts = ({limit, offset, orderBy}) => {
+    return knex('product').limit(limit).offset(offset).orderBy(orderBy[0], orderBy[1]);
 }
 
 module.exports = {

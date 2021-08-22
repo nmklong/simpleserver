@@ -26,13 +26,25 @@ app.post('/products', (req, res) => {
 app.get('/products', async (req, res) => {
     const currentPage = req.query.page ? req.query.page : 1;
     const pageSize = req.query.limit ? req.query.limit : 10;
-    const sortBy = req.query.sort ? req.query.sort : 'id';
+    const sortBy = req.query.sort ? req.query.sort : '-id';
 
     const totalRowsCountResult = await store.countProducts();
     const totalRowsCount = totalRowsCountResult.total_count;
     const totalPages = Math.ceil(totalRowsCount/pageSize);
 
-    store.getProducts().then(data => res.send({
+    const getOrderBy = rawSortBy => {
+        if (rawSortBy.indexOf('-') < 0) {
+            return [rawSortBy, 'ASC'];
+        }
+
+        return [rawSortBy.replace('-', ''), 'DESC'];
+    }
+
+    store.getProducts({
+        limit: pageSize,
+        offset: pageSize * (currentPage - 1),
+        orderBy: getOrderBy(sortBy)
+    }).then(data => res.send({
         data,
         totalPages,
         currentPage,
