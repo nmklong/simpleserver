@@ -12,6 +12,10 @@ const createProduct = ({name, description, price}) => {
         name,
         description,
         price
+    }).then(insertedIds => {
+        if (insertedIds.length > 0) {
+            return knex('product').where('id', insertedIds[0]);
+        }
     });
 };
 

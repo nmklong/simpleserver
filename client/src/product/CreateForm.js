@@ -27,7 +27,11 @@ export const CreateForm = () => {
     const submitAddingProduct = async (data) => {
         console.log(data);
 
-        await axios.post('/createProduct', data);
+        await axios.post('/products', {
+            name: data.productName,
+            description: data.productDescription,
+            price: data.productPrice
+        });
     }
 
     return (

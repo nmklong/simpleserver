@@ -11,15 +11,17 @@ app.get('/getWelcomeText', (req, res) => {
     });
 })
 
-app.post('/createProduct', (req, res) => {
+app.post('/products', (req, res) => {
     console.log(req.body);
-    store
-        .createProduct({
-            name: req.body.productName,
-            description: req.body.productDescription,
-            price: req.body.productPrice
-        })
-        .then(() => res.sendStatus(200))
+    store.createProduct({
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price
+    }).then((data) => {
+        if (data.length > 0) {
+            res.send(data[0]);
+        }
+    })
 })
 
 app.listen(7555, () => {
