@@ -24,6 +24,10 @@ app.post('/products', (req, res) => {
     })
 })
 
+app.get('/products', (req, res) => {
+    store.getProducts().then(data => res.send(data));
+})
+
 app.listen(7555, () => {
     console.log('Server running on http://localhost:7555')
 })

@@ -19,6 +19,11 @@ const createProduct = ({name, description, price}) => {
     });
 };
 
+const getProducts = () => {
+    return knex('product');
+}
+
 module.exports = {
-    createProduct
+    createProduct,
+    getProducts
 }
