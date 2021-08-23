@@ -1,8 +1,10 @@
-import {Col, Container, Row, Table} from "react-bootstrap";
+import {Col, Container, Row, Table, Button} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {ProductListPagination} from "./ProductListPagination";
 import {ProductListHeaderItem} from "./ProductListHeaderItem";
+import { useHistory } from "react-router-dom";
+
 
 export const ProductList = () => {
     const [productData, setProductData] = useState([]);
@@ -34,11 +36,19 @@ export const ProductList = () => {
         setSortBy(sortBy * -1);
     }
 
+    const history = useHistory();
+
     return (
         <Container>
             <Row>
                 <Col md={{span: 12, offset: 0}}>
                     <h2>Product List</h2>
+                    <Button
+                        variant="primary"
+                        onClick={(e) => {
+                            history.push("/create-product")
+                        }}
+                    >Create Product</Button>
                     <Table striped bordered hover>
                         <thead>
                             <tr>

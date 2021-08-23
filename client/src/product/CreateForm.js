@@ -1,6 +1,7 @@
 import {Form, Button, Container, Col, Row} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 
 export const CreateForm = () => {
@@ -23,6 +24,7 @@ export const CreateForm = () => {
             </Form.Floating>
         );
     }
+    const history = useHistory();
 
     const submitAddingProduct = async (data) => {
         console.log(data);
@@ -32,6 +34,8 @@ export const CreateForm = () => {
             description: data.productDescription,
             price: data.productPrice
         });
+
+        history.push('/');
     }
 
     return (
