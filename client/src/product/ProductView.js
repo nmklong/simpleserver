@@ -21,15 +21,25 @@ export const ProductView = () => {
     return (
         <Container>
             <Row>
-                <Col className='bg-light' md={{span: 12, offset: 0}}>
-                    <h1>
+                <Col className='bg-light product-view' md={{span: 12, offset: 0}}>
+                    <h1 className='product-title'>
                         Product ID: {productData.id}
+                        <Button
+                            variant='danger'
+                            onClick={async (e) => {
+                                if (window.confirm(`Delete product #${id}?`)) {
+                                    await axios.delete(`/products/${id}`);
+                                    history.push('/');
+                                }
+                            }}
+                        > Delete </Button>
                         <Button
                             variant='primary'
                             onClick={(e) => {
                                 history.push(`/edit-product/${id}`)
                             }}
                         > Edit </Button>
+
                     </h1>
                     <h3>Name</h3>
                     <p>{productData.name}</p>

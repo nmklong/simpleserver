@@ -29,6 +29,10 @@ const updateProduct =  ({id, name, description, price}) => {
     });
 }
 
+const deleteProduct = (id) => {
+    return knex('product').delete().where({id});
+}
+
 const countProducts = () => {
     return knex('product').count('id AS total_count').first();
 }
@@ -45,6 +49,7 @@ module.exports = {
     countProducts,
     createProduct,
     updateProduct,
+    deleteProduct,
     getProducts,
     getProduct
 }

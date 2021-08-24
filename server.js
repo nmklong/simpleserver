@@ -31,6 +31,11 @@ app.put('/products', (req, res) => {
     })
 })
 
+app.delete('/products/:id', (req, res) => {
+    const id = req.params.id;
+    store.deleteProduct(id).then(data => res.sendStatus(200));
+})
+
 app.get('/products', async (req, res) => {
     const currentPage = req.query.page ? req.query.page : 1;
     const pageSize = req.query.limit ? req.query.limit : 10;
