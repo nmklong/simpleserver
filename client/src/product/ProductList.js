@@ -74,6 +74,7 @@ export const ProductList = () => {
                                     columnLabel='Price'
                                     columnId='price'
                                 />
+                                <th/>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,6 +84,9 @@ export const ProductList = () => {
                                     <td>{dataRow.name}</td>
                                     <td>{dataRow.description}</td>
                                     <td>{dataRow.price}</td>
+                                    <td className='text-center'>
+                                        <a href={`view-product/${dataRow.id}`}>View</a>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

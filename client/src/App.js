@@ -3,6 +3,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import {CreateForm} from './product/CreateForm';
 import {ProductList} from "./product/ProductList";
+import {ProductView} from "./product/ProductView";
 import {
     BrowserRouter as Router,
     Switch,
@@ -38,6 +39,9 @@ const App = () => {
             <Switch>
                 <Route path="/create-product">
                     <CreateForm/>
+                </Route>
+                <Route path="/view-product/:id">
+                    <ProductView/>
                 </Route>
                 <Route path="/">
                     <ProductList/>

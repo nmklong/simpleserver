@@ -27,8 +27,13 @@ const getProducts = ({limit, offset, orderBy}) => {
     return knex('product').limit(limit).offset(offset).orderBy(orderBy[0], orderBy[1]);
 }
 
+const getProduct = (id) => {
+    return knex('product').where({id: id}).first();
+}
+
 module.exports = {
     countProducts,
     createProduct,
-    getProducts
+    getProducts,
+    getProduct
 }

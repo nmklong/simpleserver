@@ -53,6 +53,12 @@ app.get('/products', async (req, res) => {
     }));
 })
 
+app.get('/products/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    store.getProduct(id).then(data => res.send(data));
+})
+
 app.listen(7555, () => {
     console.log('Server running on http://localhost:7555')
 })
