@@ -1,11 +1,11 @@
-import {useParams} from "react-router-dom";
-import {Col, Container, Row} from "react-bootstrap";
+import {useHistory, useParams} from "react-router-dom";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
 export const ProductView = () => {
     const { id } = useParams();
-    const [productData, setProductData] = useState([]);
+    const [productData, setProductData] = useState({});
 
     useEffect( () => {
         const fetchProductData = async () => {
@@ -15,11 +15,22 @@ export const ProductView = () => {
 
         fetchProductData();
     }, [])
+
+    const history = useHistory();
+
     return (
         <Container>
             <Row>
                 <Col className='bg-light' md={{span: 12, offset: 0}}>
-                    <h1>Product ID: {productData.id}</h1>
+                    <h1>
+                        Product ID: {productData.id}
+                        <Button
+                            variant='primary'
+                            onClick={(e) => {
+                                history.push(`/edit-product/${id}`)
+                            }}
+                        > Edit </Button>
+                    </h1>
                     <h3>Name</h3>
                     <p>{productData.name}</p>
                     <h3>Price</h3>

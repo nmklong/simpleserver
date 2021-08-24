@@ -7,8 +7,7 @@ import {ProductView} from "./product/ProductView";
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 
 
@@ -42,6 +41,9 @@ const App = () => {
                 </Route>
                 <Route path="/view-product/:id">
                     <ProductView/>
+                </Route>
+                <Route path="/edit-product/:productId">
+                    <CreateForm/>
                 </Route>
                 <Route path="/">
                     <ProductList/>

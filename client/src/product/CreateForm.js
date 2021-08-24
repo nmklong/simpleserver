@@ -1,11 +1,28 @@
 import {Form, Button, Container, Col, Row} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 
 export const CreateForm = () => {
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
+    const { productId } = useParams();
+
+    useEffect( () => {
+        const fetchProductData = async () => {
+            const response = await axios.get(`/products/${productId}`);
+            reset({
+                'productName': response.data.name,
+                'productDescription': response.data.description,
+                'productPrice': response.data.price
+            })
+        }
+
+        if (productId) {
+            fetchProductData();
+        }
+    }, [])
 
     const FieldGroup = ({
         id,
@@ -17,8 +34,8 @@ export const CreateForm = () => {
                 <Form.Control
                     id={id}
                     placeholder={label}
-                    {...register(id)}
                     {...props}
+                    {...register(id)}
                 />
                 <label htmlFor={id}>{label}</label>
             </Form.Floating>
@@ -43,7 +60,9 @@ export const CreateForm = () => {
             <Row>
                 <Col md={{span: 6, offset: 3}}>
                     <Form onSubmit={handleSubmit(submitAddingProduct)}>
-                        <h3>Add New Product</h3>
+                        <h3>
+                            {productId ? `Edit Product #${productId}` : 'Add New Product'}
+                        </h3>
                         <FieldGroup
                             id="productName"
                             type="text"
