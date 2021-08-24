@@ -29,7 +29,7 @@ export const ProductList = () => {
         }
 
         loadProductData().then(r => {});
-    },[currentPage, sortBy])
+    },[currentPage, sortBy, sortByColumn])
 
     const toggleSortBy = (column) => {
         setSortByColumn(column);
@@ -85,7 +85,7 @@ export const ProductList = () => {
                                     <td>{dataRow.description}</td>
                                     <td>{dataRow.price}</td>
                                     <td className='text-center'>
-                                        <a href={`view-product/${dataRow.id}`}>View</a>
+                                        <a href={`/view-product/${dataRow.id}`}>View</a>
                                     </td>
                                 </tr>
                             ))}

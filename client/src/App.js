@@ -7,32 +7,17 @@ import {ProductView} from "./product/ProductView";
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Link
 } from "react-router-dom";
 
 
 const App = () => {
-    const [welcomeText, setWelcomeText] = useState('Loading');
-    useEffect(() => {
-        const loadWelcomeText = async () => {
-            try {
-                const response = await fetch('/getWelcomeText');
-                const body = await response.json();
-                setWelcomeText(body.welcomeText);
-            } catch (e) {
-                console.log('Problem:' + e.message);
-            }
-        }
-
-        loadWelcomeText().then(r => {
-        });
-    }, []);
-
     return (
         <Router>
             <div className="App">
                 <img src={logo} className="App-logo" alt="logo"/>
-                <h1>{welcomeText}</h1>
+                <h1><Link to="/">Home</Link></h1>
             </div>
 
             <Switch>

@@ -19,6 +19,16 @@ const createProduct = ({name, description, price}) => {
     });
 };
 
+const updateProduct =  ({id, name, description, price}) => {
+    return knex('product').update({
+        name,
+        description,
+        price
+    }).where({id}).then(rowsCount => {
+        return knex('product').where({id});
+    });
+}
+
 const countProducts = () => {
     return knex('product').count('id AS total_count').first();
 }
@@ -34,6 +44,7 @@ const getProduct = (id) => {
 module.exports = {
     countProducts,
     createProduct,
+    updateProduct,
     getProducts,
     getProduct
 }

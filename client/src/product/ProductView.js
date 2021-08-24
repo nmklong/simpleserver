@@ -14,7 +14,7 @@ export const ProductView = () => {
         }
 
         fetchProductData();
-    }, [])
+    }, [id])
 
     const history = useHistory();
 

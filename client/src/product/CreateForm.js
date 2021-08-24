@@ -2,7 +2,7 @@ import {Form, Button, Container, Col, Row} from "react-bootstrap";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 
 export const CreateForm = () => {
@@ -22,7 +22,7 @@ export const CreateForm = () => {
         if (productId) {
             fetchProductData();
         }
-    }, [])
+    }, [productId, reset])
 
     const FieldGroup = ({
         id,
@@ -45,14 +45,21 @@ export const CreateForm = () => {
 
     const submitAddingProduct = async (data) => {
         console.log(data);
-
-        await axios.post('/products', {
+        const productData = {
             name: data.productName,
             description: data.productDescription,
             price: data.productPrice
-        });
+        }
 
-        history.push('/');
+        if (productId) {
+            productData.id = productId;
+            await axios.put('/products', productData);
+            history.push(`/view-product/${productId}`);
+        } else {
+            const response = await axios.post('/products', productData);
+            history.push(`/view-product/${response.data.id}`);
+        }
+
     }
 
     return (
